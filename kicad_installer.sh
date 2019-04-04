@@ -1,5 +1,8 @@
 echo "running script to install kicad on fedora"
 
+arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
+python-devel boost boost-devel wxPython wxPython-devel openssl-dev)
+
 sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
 python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
 
