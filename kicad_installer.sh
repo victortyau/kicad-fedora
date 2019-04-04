@@ -3,6 +3,15 @@ echo "running script to install kicad on fedora"
 arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
 python-devel boost boost-devel wxPython wxPython-devel openssl-dev)
 
+i=0
+
+while [ $i -lt ${#arr_libraries[@]} ]
+    do
+        
+        i=$((i+1))
+    done
+
+
 sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
 python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
 
