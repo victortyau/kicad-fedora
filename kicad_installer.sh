@@ -7,10 +7,19 @@ i=0
 
 while [ $i -lt ${#arr_libraries[@]} ]
     do
-        
+        number=$(rpm -qa ${arr_libraries[$i]} | wc -c )
+        echo $number
+        if [ $number -gt 0 ];
+        then
+            echo -e "[\xE2\x9C\x94] ${arr_libraries[$i]} existing"
+            
+        else
+            echo -e "[\xE2\x9D\x8C] ${arr_libraries[$i]} missing"       
+       fi
         i=$((i+1))
     done
 
+exit 0
 
 sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
 python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
