@@ -1,23 +1,38 @@
 echo "running script to install kicad on fedora"
 
+starttime=$(date +%s)
+
 arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
 python-devel boost boost-devel wxPython wxPython-devel openssl-dev)
+
+arr_install_libraries=()
+
+echo ${#arr_libraries[@]}
+echo ${#arr_install_libraries[@]}
 
 i=0
 
 while [ $i -lt ${#arr_libraries[@]} ]
     do
         number=$(rpm -qa ${arr_libraries[$i]} | wc -c )
-        echo $number
         if [ $number -gt 0 ];
         then
             echo -e "[\xE2\x9C\x94] ${arr_libraries[$i]} existing"
-            
         else
-            echo -e "[\xE2\x9D\x8C] ${arr_libraries[$i]} missing"       
+            echo -e "[\xE2\x9D\x8C] ${arr_libraries[$i]} missing"
+            arr_install_libraries+=(${arr_libraries[$i]})       
        fi
         i=$((i+1))
     done
+
+echo ${#arr_libraries[@]}
+echo ${#arr_install_libraries[@]}
+
+endtime=$(date +%s)
+
+secs=$(($endtime - $starttime))
+
+printf 'Elapsed Time %dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
 
 exit 0
 
