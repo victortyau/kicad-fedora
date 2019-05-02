@@ -3,7 +3,8 @@ echo "running script to install kicad on fedora"
 starttime=$(date +%s)
 
 arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python-devel boost boost-devel wxPython wxPython-devel openssl-dev)
+python-devel boost boost-devel wxPython wxPython-devel) 
+#openssl-dev)
 
 arr_install_libraries=()
 
@@ -28,16 +29,14 @@ while [ $i -lt ${#arr_libraries[@]} ]
 echo ${#arr_libraries[@]}
 echo ${#arr_install_libraries[@]}
 
-endtime=$(date +%s)
+libs=$(IFS=$' '; echo "${arr_install_libraries[*]}")
 
-secs=$(($endtime - $starttime))
+echo $libs
 
-printf 'Elapsed Time %dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
-
-exit 0
-
-sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
+if [ $(echo $libs | wc -c ) -gt 0 ];
+  then
+    sudo dnf install $libs
+fi
 
 sudo dnf groupinstall "Development Tools"
 
@@ -64,6 +63,18 @@ cmake $flags ..
 make 
 
 make install 
+
+endtime=$(date +%s)
+
+secs=$(($endtime - $starttime))
+
+printf 'Elapsed Time %dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
+
+exit 0
+
+sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
+python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
+
 
 git clone "https://git.launchpad.net/kicad"
 
