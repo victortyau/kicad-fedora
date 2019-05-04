@@ -3,7 +3,7 @@ echo "running script to install kicad on fedora"
 starttime=$(date +%s)
 
 arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qtwebkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python2-devel boost boost-devel python2-wxpython wxPython-devel openssl-devel) #openssl-libs)
+python2-devel boost boost-devel python2-wxpython wxPython-devel openssl-devel) 
 
 arr_install_libraries=()
 
