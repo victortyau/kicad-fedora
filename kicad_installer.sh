@@ -2,9 +2,8 @@ echo "running script to install kicad on fedora"
 
 starttime=$(date +%s)
 
-arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python-devel boost boost-devel wxPython wxPython-devel) 
-#openssl-dev)
+arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qtwebkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
+python2-devel boost boost-devel python2-wxpython wxPython-devel openssl-devel) #openssl-libs)
 
 arr_install_libraries=()
 
@@ -31,14 +30,14 @@ echo ${#arr_install_libraries[@]}
 
 libs=$(IFS=$' '; echo "${arr_install_libraries[*]}")
 
-echo $libs
-
-if [ $(echo $libs | wc -c ) -gt 0 ];
+if [ ${#arr_install_libraries[@]} -gt 0 ];
   then
     sudo dnf install $libs
 fi
 
 sudo dnf groupinstall "Development Tools"
+
+cd ..
 
 git clone "git://github.com/tpaviot/oce.git"
 
@@ -58,23 +57,13 @@ flags="$flags -DOCE_DRAW:BOOL=ON"
 
 flags="$flags -DOCE_TESTING:BOOL=ON"
 
-cmake $flags ..
+#cmake $flags ..
 
-make 
+#make 
 
-make install 
+#make install 
 
-endtime=$(date +%s)
-
-secs=$(($endtime - $starttime))
-
-printf 'Elapsed Time %dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
-
-exit 0
-
-sudo dnf install "cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qt-webkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python-devel boost boost-devel wxPython wxPython-devel openssl-dev"
-
+cd ../..
 
 git clone "https://git.launchpad.net/kicad"
 
@@ -96,9 +85,15 @@ mkdir -p "build/release"
 
 cd "build/release"
 
-cmake -DCMAKE_BUILD_TYPE=Release \
-      ../../
+#cmake -DCMAKE_BUILD_TYPE=Release         ../../
+cmake -DCMAKE_BUILD_TYPE=Release       ../../
 
 make
 
 sudo make install
+
+endtime=$(date +%s)
+
+secs=$(($endtime - $starttime))
+
+printf 'Elapsed Time %dh:%dm:%ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))
