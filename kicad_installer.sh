@@ -57,11 +57,11 @@ flags="$flags -DOCE_DRAW:BOOL=ON"
 
 flags="$flags -DOCE_TESTING:BOOL=ON"
 
-#cmake $flags ..
+cmake $flags ..
 
-#make 
+make 
 
-#make install 
+make install 
 
 cd ../..
 
@@ -85,7 +85,6 @@ mkdir -p "build/release"
 
 cd "build/release"
 
-#cmake -DCMAKE_BUILD_TYPE=Release         ../../
 cmake -DCMAKE_BUILD_TYPE=Release       ../../
 
 make
