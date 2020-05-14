@@ -3,7 +3,7 @@ echo "running script to install kicad on fedora"
 starttime=$(date +%s)
 
 arr_libraries=(cmake glew-devel glm-devel libcurl-devel cairo-devel tcsh openmpi openmpi-devel qt-devel qtwebkit-devel tcl-devel tk-devel tcllib tklib libXmu-devel autoconf automake bison flex gcc git libtool make swig
-python2-devel boost boost-devel python2-wxpython wxPython-devel openssl-devel) 
+python2-devel boost boost-devel openssl-devel) 
 
 arr_install_libraries=()
 
@@ -65,7 +65,7 @@ make install
 
 cd ../..
 
-git clone "https://git.launchpad.net/kicad"
+git clone "https://gitlab.com/kicad/code/kicad.git"
 
 cd kicad
 
@@ -85,11 +85,14 @@ mkdir -p "build/release"
 
 cd "build/release"
 
-cmake -DCMAKE_BUILD_TYPE=Release       ../../
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DKICAD_SCRIPTING=OFF \
+      -DKICAD_SCRIPTING_MODULES=ON \
+      -DKICAD_SCRIPTING_WXPYTHON=OFF \
+      ../../
+
 
 make
-
-sudo make install
 
 endtime=$(date +%s)
 
