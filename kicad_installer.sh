@@ -59,7 +59,7 @@ flags="$flags -DOCE_TESTING:BOOL=ON"
 
 cmake $flags ..
 
-make 
+make -j6
 
 make install 
 
@@ -92,7 +92,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       ../../
 
 
-make
+make -j6
 
 endtime=$(date +%s)
 
